@@ -1,0 +1,57 @@
+from groq import Groq
+import requests,json,os
+
+from time import perf_counter
+from models.model import LLMResponse
+from dotenv import load_dotenv
+
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_MODEL = os.getenv("GROQ_MODEL")
+
+class GroqService:
+    def __init__(self,model:str | None = None):
+        self.model = model or os.getenv("GROQ_MODEL")
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            raise ValueError("Groq API Key is not configured")
+
+        self.client = Groq(api_key=api_key)
+
+
+    def generate(
+            self,
+            prompt: str,
+            system_prompt: str = "You are a helpful assistant.",
+            temperature: float = 0.0,
+            max_tokens: int = 300,
+        ) -> LLMResponse:
+
+        start = perf_counter()
+
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages= [{"role":"system","content":system_prompt},
+                        {"role":"user","content":prompt},
+                ],
+                temperature= temperature,
+                max_tokens= max_tokens,
+            )
+
+            latency = perf_counter() - start
+            choice = response.choices[0]
+        except Exception as e:
+            print(f"Failed for {self.model}: {e}")
+
+        return LLMResponse(
+            text = choice.message.content or "",
+            service= "groq",
+            model= self.model,
+            latency_seconds= latency,
+            input_tokens= response.usage.prompt_tokens,
+            output_tokens= response.usage.completion_tokens,
+        )
+
+    

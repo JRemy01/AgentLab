@@ -1,0 +1,116 @@
+{
+  "created_at": "2026-10-12T16:31:16.355910+00:00",
+  "benchmark_file": "data/benchmark.json",
+  "case_count": 3,
+  "result_count": 6,
+  "results": [
+    {
+      "case_id": "distillation_001",
+      "service": "GroqService",
+      "model": "openai/gpt-oss-20b",
+      "answer": "**Benefit:**  \nDistillation can reduce inference cost and latency by training a smaller student model to imitate a larger teacher model. [D1]\n\n**Limitation:**  \nThe student model may exhibit lower performance compared to the teacher model. [D1]",
+      "generation_latency_seconds": 0.3345219589973567,
+      "input_tokens": 204,
+      "output_tokens": 152,
+      "evaluation": {
+        "correctness": 1,
+        "faithfulness": 1,
+        "citation_validity": 1,
+        "admit_wrong": null,
+        "completeness": 1,
+        "reason": "The answer correctly states the benefit (reduced inference cost and latency) and limitation (lower performance) as described in D1, and the citations accurately reference the source."
+      },
+      "error": null
+    },
+    {
+      "case_id": "distillation_002",
+      "service": "GroqService",
+      "model": "openai/gpt-oss-20b",
+      "answer": "Insufficient information in the provided documents.",
+      "generation_latency_seconds": 0.17007966700475663,
+      "input_tokens": 183,
+      "output_tokens": 91,
+      "evaluation": {
+        "correctness": 1,
+        "faithfulness": 1,
+        "citation_validity": 1,
+        "admit_wrong": 1,
+        "completeness": 1,
+        "reason": "The document only states that distillation can reduce inference latency, without providing a specific percentage. Therefore, the answer correctly acknowledges the lack of information."
+      },
+      "error": null
+    },
+    {
+      "case_id": "distillation_003",
+      "service": "GroqService",
+      "model": "openai/gpt-oss-20b",
+      "answer": "Distillation trains a student model to imitate a teacher model. [D1]",
+      "generation_latency_seconds": 0.3958541250030976,
+      "input_tokens": 187,
+      "output_tokens": 90,
+      "evaluation": {
+        "correctness": 1,
+        "faithfulness": 1,
+        "citation_validity": 1,
+        "admit_wrong": null,
+        "completeness": 1,
+        "reason": "The answer directly quotes the definition from D1 and cites it, matching the question."
+      },
+      "error": null
+    },
+    {
+      "case_id": "distillation_001",
+      "service": "OllamaServise",
+      "model": "mistral:latest",
+      "answer": " One benefit of distillation, as stated in [D1], is that it can reduce inference cost and latency.\n\nOne limitation, also mentioned in [D1], is that the student model, which is the model trained by distillation, may have lower performance compared to the teacher model.",
+      "generation_latency_seconds": 10.652459209013614,
+      "input_tokens": 169,
+      "output_tokens": 65,
+      "evaluation": {
+        "correctness": 1,
+        "faithfulness": 1,
+        "citation_validity": 0,
+        "admit_wrong": null,
+        "completeness": 1,
+        "reason": "The answer correctly identifies the benefit (reduced inference cost and latency) and limitation (lower performance) stated in D1, but it does not provide any citations."
+      },
+      "error": null
+    },
+    {
+      "case_id": "distillation_002",
+      "service": "OllamaServise",
+      "model": "mistral:latest",
+      "answer": " Insufficient information in the provided documents to determine the exact percentage of latency reduction. [D1] only states that distillation can reduce inference latency, but it does not provide specific numerical data.",
+      "generation_latency_seconds": 6.513628166998387,
+      "input_tokens": 147,
+      "output_tokens": 44,
+      "evaluation": {
+        "correctness": 1,
+        "faithfulness": 1,
+        "citation_validity": 1,
+        "admit_wrong": 1,
+        "completeness": 1,
+        "reason": "The answer correctly states that the document does not provide a specific percentage, which is supported by the text of D1."
+      },
+      "error": null
+    },
+    {
+      "case_id": "distillation_003",
+      "service": "OllamaServise",
+      "model": "mistral:latest",
+      "answer": " According to the provided document [D1], distillation refers to the process of training a student model to imitate a teacher model.",
+      "generation_latency_seconds": 4.86265833399375,
+      "input_tokens": 151,
+      "output_tokens": 29,
+      "evaluation": {
+        "correctness": 1,
+        "faithfulness": 1,
+        "citation_validity": 1,
+        "admit_wrong": null,
+        "completeness": 1,
+        "reason": "The answer accurately reflects the definition of distillation as stated in document D1 and cites the correct source."
+      },
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+import requests,json,os
+
+from models.model import LLMResponse
+from time import perf_counter
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class OllamaServise:
+    def __init__(self,model:str | None = None):
+        self.model = model or os.getenv("OLLAMA_MODEL")
+        self.ollama_url = os.getenv("OLLAMA_URL")
+
+    def generate(
+            self,
+            prompt: str,
+            system_prompt: str = "You are a helpful assistant.",
+            temperature: float = 0.0,
+            max_tokens: int = 300,
+        ) -> LLMResponse:
+
+        start = perf_counter()
+        
+        response = requests.post(
+            f"{self.ollama_url}/api/chat",
+            json= {
+                "model":self.model,
+                "messages": [
+                    {"role":"system", "content":system_prompt},
+                    {"role":"user", "content":prompt},
+                ],
+
+                "stream": False,
+                "options":{
+                    "temperature": temperature,
+                    "num_predict":max_tokens,
+                },
+            },
+            timeout=120,
+            
+        )
+        response.raise_for_status()
+
+        result = response.json()
+        latency = perf_counter() - start
+       
+
+        return LLMResponse(
+            text = result["message"]["content"],
+            service= "ollama",
+            model= self.model,
+            latency_seconds= latency,
+            input_tokens= result.get("prompt_eval_count"),
+            output_tokens= result.get("eval_count"),
+        )
+            

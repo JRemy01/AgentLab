@@ -1,0 +1,13 @@
+test_id,service,model,status,latency_seconds,input_tokens,output_tokens,matched_facts,expected_fact_count,fact_coverage,citation_present,correct,correct_and_cited,answer,error
+distillation_001,groq,openai/gpt-oss-20b,ok,1.853,204,152,2,2,1.0,True,True,True,"**Benefit:**  
+Distillation can reduce inference cost and latency by training a smaller student model to imitate a larger teacher model. [D1]
+
+**Limitation:**  
+The student model may exhibit lower performance compared to the teacher model. [D1]",
+distillation_002,groq,openai/gpt-oss-20b,ok,0.394,183,91,0,0,,False,True,True,Insufficient information in the provided documents.,
+distillation_003,groq,openai/gpt-oss-20b,ok,0.511,187,90,0,1,0.0,True,False,False,Distillation trains a student model to imitate a teacher model. [D1],
+distillation_001,ollama,mistral:latest,ok,8.078,169,65,2,2,1.0,True,True,True," One benefit of distillation, as stated in [D1], is that it can reduce inference cost and latency.
+
+One limitation, also mentioned in [D1], is that the student model, which is the model trained by distillation, may have lower performance compared to the teacher model.",
+distillation_002,ollama,mistral:latest,ok,2.485,147,44,0,0,,True,True,True," Insufficient information in the provided documents to determine the exact percentage of latency reduction. [D1] only states that distillation can reduce inference latency, but it does not provide specific numerical data.",
+distillation_003,ollama,mistral:latest,ok,1.834,151,29,0,1,0.0,True,False,False," According to the provided document [D1], distillation refers to the process of training a student model to imitate a teacher model.",
